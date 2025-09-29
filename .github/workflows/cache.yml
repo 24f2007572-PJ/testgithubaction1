@@ -23,12 +23,12 @@ jobs:
           key: cache-56ae1fc
 
       - name: prime-cache-56ae1fc
-        run: echo "Cache status: ${{ steps.cache.outputs.cache_hit }}"
+        run: echo "Cache status:${{ steps.cache.outputs.cache_hit }}"
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 18
 
       - name: Install Dependencies
         run: npm install
