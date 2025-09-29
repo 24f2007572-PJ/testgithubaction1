@@ -1,0 +1,37 @@
+name: CI with Cache
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Cache Node.js modules
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: cache-56ae1fc
+
+      - name: prime-cache-56ae1fc
+        run: echo "Cache status: ${{ steps.cache.outputs.cache-hit }}"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm test
